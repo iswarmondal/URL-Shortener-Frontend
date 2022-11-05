@@ -31,9 +31,7 @@ function ShortedLinksList({updateList}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {console.log(urls?.data)}
                 {urls?.data?.map((data, i) =>{
-                    console.log(data);
                     return(
                         <tr key={i} className='my-3'>
                             <td className='px-10'>

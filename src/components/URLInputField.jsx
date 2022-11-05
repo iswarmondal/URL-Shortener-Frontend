@@ -9,7 +9,7 @@ function URLInputField({setUpdateList}) {
     e.preventDefault();
 
     axios({
-      url: "http://localhost:4000/short-that-url",
+      url: `${process.env.REACT_APP_BASE_URL}/short-that-url`,
       method: "POST",
       headers: {
         // authorization: "your token comes here",

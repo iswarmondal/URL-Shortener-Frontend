@@ -25,7 +25,7 @@ function Register() {
                 password: userData.password
             };
             axios({
-                url: 'http://localhost:4000/api/user/register',
+                url: `${process.env.REACT_APP_BASE_URL}/api/user/register`,
                 method: 'POST',
                 data: newUserData
             })

@@ -7,7 +7,7 @@ function ShortedLinksList({updateList}) {
 
     useEffect(() => {
         axios({
-            url: "http://localhost:4000/get-all-urls",
+            url: `${process.env.REACT_APP_BASE_URL}/get-all-urls`,
             method: 'GET'
         })
         .then((res)=>{
@@ -38,7 +38,7 @@ function ShortedLinksList({updateList}) {
                                 <a href={data.fullURL}>{data.fullURL}</a>
                             </td>
                             <td className='px-10'>
-                                <a href={"http://localhost:4000/" + data.shortURL}>{data.shortURL}</a>
+                                <a href={`${process.env.REACT_APP_BASE_URL}/${data.shortURL}`}>{data.shortURL}</a>
                             </td>
                             <td className='px-10'>{data.clicks}</td>
                         </tr>

@@ -15,6 +15,8 @@ function Register() {
 
     const [error, setError] = useState(undefined);
 
+    const [userNameExsist, setUserNameExists] = useState(false);
+
     const handleSubmit = (e) =>{
         e.preventDefault();
 
@@ -49,6 +51,29 @@ function Register() {
     const handleChange = (e) =>{
         setUserData({...userData, [e.target.name]: e.target.value});
     }
+    const handleUserNameChange = (e) =>{
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+        console.log(setUserData);
+
+        // Check if the username already exists
+        axios({
+            url: `${process.env.REACT_APP_BASE_URL}/api/user/check-username`,
+            method: 'POST',
+            data: { username : e.target.value }
+        })
+        .then(res=>{
+            console.log(res.data);
+            if (res.data.success == true){
+                setUserNameExists(false);
+            }else{
+                setUserNameExists(true);
+            }
+        })
+        .catch(error=>{
+            console.log(error.message);
+            setError("Cannot check the username if it exists")
+        })
+    }
 
     return (
         <>
@@ -57,13 +82,16 @@ function Register() {
                 <h3 className='mt-3 text-red-700 font-semibold underline underline-offset-4'>{error}</h3>
 
                 <form className='mt-4 flex flex-col justify-center items-center'>
-                    <input 
-                    type="text" 
-                    className='border-2 p-4 rounded-md border-zinc-400 mt-5'
-                    placeholder='Username..?'
-                    name='username'
-                    required
-                    onChange={handleChange} />
+                    <div className='flex relative'>
+                        <input
+                        type="text" 
+                        className='border-2 p-4 rounded-md border-zinc-400 mt-5'
+                        placeholder='Username..?'
+                        name='username'
+                        required
+                        onChange={handleUserNameChange} />
+                        <div className='text-red-600 absolute top-[50%] right-[10%] font-semibold text-xs'>{userNameExsist? "Already used":""}</div>
+                    </div>
 
                     <input
                     type="email" 

@@ -36,8 +36,8 @@ function Login() {
                     }
                 })
                 .catch(error => {
-                    setError(error.message);
-                    console.log(error);
+                    setError(error.response.data.message);
+                    console.log(error.response.data.message);
                 })
         } else {
             setError("Please enter username and password !")

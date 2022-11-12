@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from 'axios';
+import authAxios from '../authAxios';
 
 function URLInputField({setUpdateList}) {
   const [url, setUrl] = useState(null)
@@ -8,12 +8,9 @@ function URLInputField({setUpdateList}) {
 
     e.preventDefault();
 
-    axios({
-      url: `${process.env.REACT_APP_BASE_URL}/short-that-url`,
+    authAxios({
+      url: `/short-that-url`,
       method: "POST",
-      headers: {
-        // authorization: "your token comes here",
-      },
       data: {
         "fullURL": url
       },

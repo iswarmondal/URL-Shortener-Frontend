@@ -18,7 +18,7 @@ function ShortedLinksList({updateList}) {
             console.log("Error " + urls);
         })
 
-    }, [])
+    }, [updateList])
     
     return (
         <div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import authAxios from '../authAxios';
 
-function URLInputField({setUpdateList}) {
+function URLInputField({updateList, setUpdateList}) {
   const [url, setUrl] = useState(null)
 
   const submitHandler = (e) => {
@@ -16,7 +16,7 @@ function URLInputField({setUpdateList}) {
       },
     })
       .then((res) => { if(res.data.success){
-        setUpdateList(true)
+        updateList ? setUpdateList(false) : setUpdateList(true);
       } })
 
       .catch((err) => { console.log(err); });

@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import authAxios from '../authAxios';
 
 function URLInputField({updateList, setUpdateList}) {
+  const navigate = useNavigate();
   const [url, setUrl] = useState(null)
 
   const submitHandler = (e) => {
@@ -11,15 +13,25 @@ function URLInputField({updateList, setUpdateList}) {
     authAxios({
       url: `/short-that-url`,
       method: "POST",
+      headers:{
+        "authorization" : `${localStorage.getItem("authToken")}`
+      },
       data: {
-        "fullURL": url
+        "fullURL": url,
       },
     })
       .then((res) => { if(res.data.success){
         updateList ? setUpdateList(false) : setUpdateList(true);
-      } })
+      }else{
+        navigate("/login")
+      }})
 
-      .catch((err) => { console.log(err); });
+      .catch((err) => {
+        console.log(err.response.data);
+        if(err.response.data.success === false){
+          navigate("/login")
+        }
+      });
 
   }
   return (

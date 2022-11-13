@@ -8,7 +8,7 @@ function Home() {
   return (
     <>
         <div className='border p-5 flex justify-center'>
-            <URLInputField setUpdateList={setUpdateList} />
+            <URLInputField updateList={updateList} setUpdateList={setUpdateList} />
         </div>
         <div className='flex justify-center py-5'>
           <ShortedLinksList updateList={updateList} />

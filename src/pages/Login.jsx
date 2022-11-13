@@ -29,7 +29,7 @@ function Login() {
                 .then((res) => {
                     if (res.data.success) {
                         alert("Login successful !");
-                        localStorage.setItem("authToken", res.data.authToken);
+                        localStorage.setItem("authToken", `Barear ${res.data.authToken}`);
                         navigate("/?perviousUser=true&from=login")
                     } else {
                         setError(res.data.message);

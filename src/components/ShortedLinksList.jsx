@@ -4,17 +4,24 @@ import React, {useEffect, useState} from 'react'
 function ShortedLinksList({updateList}) {
 
     const [urls, setUrls] = useState([])
+    const [error, setError] = useState(false)
 
     useEffect(() => {
         axios({
             url: `${process.env.REACT_APP_BASE_URL}/get-all-urls`,
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                "authorization" : `${localStorage.getItem("authToken")}`
+            }
         })
         .then((res)=>{
+            if(res.data.success == false){
+                setError("Please Login")
+            }
             setUrls(res.data);
         })
         .catch((err)=>{
-            setUrls(err.message)
+            setUrls(err.response.data.message)
             console.log("Error " + urls);
         })
 
@@ -22,7 +29,11 @@ function ShortedLinksList({updateList}) {
     
     return (
         <div>
-            <table className="table-auto">
+            <div className='flex justify-center content-center text-lg font-semibold text-red-400'>
+                {error}
+            </div>
+            {!error ?
+            (<table className="table-auto">
                 <thead>
                     <tr>
                         <th className='px-10'>Full URL</th>
@@ -45,7 +56,7 @@ function ShortedLinksList({updateList}) {
                     )
                 })}
                 </tbody>
-            </table>
+            </table>) : ""}
         </div>
     )
 }

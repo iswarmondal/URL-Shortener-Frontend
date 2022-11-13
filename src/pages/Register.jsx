@@ -34,7 +34,7 @@ function Register() {
             .then((res)=>{
                 if(res.data.success){
                     alert("Done !");
-                    navigate("/?newUser=true&from=register")
+                    navigate("login/?newUser=true&from=register")
                 }else{
                     setError(res.data.message);
                 }

@@ -1,20 +1,46 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
+import { MenuItem } from '@mui/material';
 
 function NavBar() {
   return (
     <>
-      <div className='h-[3.5em] bg-yellow-100 flex justify-around items-center overflow-hidden'>
-        <h1 className='font-bold text-2xl'>URL Shortiner</h1>
-
-        <div className='w-[60%] h-full flex justify-around items-center'>
-          {/* Nav links */}
-          <NavLink to="/">Home</NavLink>
-          <NavLink to="/user/register">Register</NavLink>
-          <NavLink to="/dashboard">Dashboard</NavLink>
-          <NavLink to="/login">Login</NavLink>
-        </div>
-      </div>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" color="primary">
+          <Toolbar>
+            <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
+              URL Shortener
+            </Typography>
+            <NavLink to="/">
+              <MenuItem color="inherit" >
+                Home
+              </MenuItem>
+            </NavLink>
+            <NavLink to="/user/register">
+              <MenuItem color="inherit" >
+                Register
+              </MenuItem>
+            </NavLink>
+            <NavLink to="/dashboard">
+              <MenuItem color="inherit" >
+                Dashboard
+              </MenuItem>
+            </NavLink>
+            <NavLink to="/login">
+              <MenuItem color="inherit" >
+                Login
+              </MenuItem>
+            </NavLink>
+          </Toolbar>
+        </AppBar>
+      </Box>
     </>
   )
 }
